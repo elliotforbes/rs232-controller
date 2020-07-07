@@ -1,28 +1,29 @@
 package main
 
 import (
-    "fmt"
-    "time"
-	"github.com/nathan-osman/go-sunrise"
+	"fmt"
+	"time"
+
 	"github.com/chimera/go-inside/rs232"
+	"github.com/nathan-osman/go-sunrise"
 )
 
 const (
 	HALFBRIGHTNESS = "HEXCODE"
-	COM_PORT = "COM1"
+	COM_PORT       = "COM1"
 )
 
 func sendRs232Command() {
 	port, err := rs232.Open(COM_PORT, rs232.Options{
-		BitRate: 115200,
+		BitRate:  115200,
 		DataBits: 8,
 		StopBits: 1,
-		Parity: rs232.PARITY_NONE,
-		Timeout: 0,
+		Parity:   rs232.PARITY_NONE,
+		Timeout:  0,
 	})
 	if err != nil {
 		fmt.Println(err)
-	}	
+	}
 
 	n, err := port.Write([]byte(HALFBRIGHTNESS))
 	if err != nil {
@@ -37,18 +38,19 @@ func main() {
 
 	for {
 		year, month, day := time.Now().Date()
-	
+
 		_, set := sunrise.SunriseSunset(
-			51.5074, 0.1278,          // London
-			year, month, day, 
+			51.5074, 0.1278, // London
+			year, month, day,
 		)
-		
+
 		if time.Now().Sub(set) > 0 {
 			fmt.Println("After Sunset, sending rs232 command")
 			sendRs232Command()
 		} else {
 			fmt.Println("Before Sunset, not sending")
 		}
+		time.Sleep(1 * time.Minute)
 	}
 
 }
