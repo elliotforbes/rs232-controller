@@ -13,7 +13,13 @@ const (
 )
 
 func sendRs232Command() {
-	port, err := rs232.Open(COM_PORT, &rs232.Options{})
+	port, err := rs232.Open(COM_PORT, rs232.Options{
+		BitRate: 115200,
+		DataBits: 8,
+		StopBits: 1,
+		Parity: rs232.PARITY_NONE,
+		Timeout: 0,
+	})
 	if err != nil {
 		fmt.Println(err)
 	}	
@@ -28,18 +34,21 @@ func sendRs232Command() {
 }
 
 func main() {
-    // You can use the Parameters structure to set the parameters
-    rise, set := sunrise.SunriseSunset(
-		51.5074, 0.1278,          // London
-		2020, time.July, 7,  // 2000-01-01
-	)
-	
-	//51.5074° N, 0.1278° W
-	
-	fmt.Println(rise)
-	fmt.Println(set)
 
-
-	sendRs232Command()
+	for {
+		year, month, day := time.Now().Date()
+	
+		_, set := sunrise.SunriseSunset(
+			51.5074, 0.1278,          // London
+			year, month, day, 
+		)
+		
+		if time.Now().Sub(set) > 0 {
+			fmt.Println("After Sunset, sending rs232 command")
+			sendRs232Command()
+		} else {
+			fmt.Println("Before Sunset, not sending")
+		}
+	}
 
 }
