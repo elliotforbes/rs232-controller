@@ -1,0 +1,6 @@
+github.com/chimera/go-inside v0.0.0-20131207030108-ea596fb9b370 h1:0THaJU9GU78c59b4wx79lH68RgJMOmxlAP8nXFO3fWY=
+github.com/chimera/go-inside v0.0.0-20131207030108-ea596fb9b370/go.mod h1:eYic+OGOZWo4SrDHYzfoquvCByFWLiq+n5eNJgzOq7I=
+github.com/kelvins/sunrisesunset v0.0.0-20170601204625-14f1915ad4b4 h1:8GEzGYjqXcb1PW2RFrkbsv7Gzq4v9ykbjy6lUc9nbnM=
+github.com/kelvins/sunrisesunset v0.0.0-20170601204625-14f1915ad4b4/go.mod h1:3oZ7G+fb8Z8KF+KPHxeDO3GWpEjgvk/f+d/yaxmDRT4=
+github.com/nathan-osman/go-sunrise v0.0.0-20171121204956-7c449e7c690b h1:nWQAhkNZTyV8tfXIpwSGm97Pd0mM1y9tutJiyWoEhw0=
+github.com/nathan-osman/go-sunrise v0.0.0-20171121204956-7c449e7c690b/go.mod h1:kCE4+NvReDuwiJGk03l6QONGmYy805GQP3xGcCm8cBg=
