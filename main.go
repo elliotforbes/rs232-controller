@@ -9,31 +9,37 @@ import (
 
 const (
 	HALFBRIGHTNESS = "HEXCODE"
+	COM_PORT = "COM1"
 )
 
-// func sendRs232Command() {
-// 	port, err := rs232.Open("Controll Dimness", &rs232.Options{})
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}	
+func sendRs232Command() {
+	port, err := rs232.Open(COM_PORT, &rs232.Options{})
+	if err != nil {
+		fmt.Println(err)
+	}	
 
-// 	n, err := port.Write([]byte(HALFBRIGHTNESS))
-// 	if err != nil {
-// 		fmt.Println(err)
-// 	}
+	n, err := port.Write([]byte(HALFBRIGHTNESS))
+	if err != nil {
+		fmt.Println(err)
+	}
 
-// 	fmt.Println(n)
+	fmt.Println(n)
 
 }
 
 func main() {
     // You can use the Parameters structure to set the parameters
     rise, set := sunrise.SunriseSunset(
-		43.65, -79.38,          // Toronto, CA
-		2000, time.January, 1,  // 2000-01-01
+		51.5074, 0.1278,          // London
+		2020, time.July, 7,  // 2000-01-01
 	)
+	
+	//51.5074° N, 0.1278° W
+	
+	fmt.Println(rise)
+	fmt.Println(set)
 
 
-	// sendRs232Command()
+	sendRs232Command()
 
 }
