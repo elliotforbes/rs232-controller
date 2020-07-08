@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/chimera/go-inside/rs232"
+	"github.com/elliotforbes/rs232-controller/rs232"
 	"github.com/nathan-osman/go-sunrise"
 )
 

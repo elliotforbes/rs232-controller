@@ -2,17 +2,13 @@ package main
 
 import (
 	"fmt"
+	"os"
 
-	"github.com/chimera/go-inside/rs232"
+	"github.com/elliotforbes/rs232-controller/rs232"
 )
 
-const (
-	HALFBRIGHTNESS = "HEXCODE"
-	COM_PORT       = "ttyUSB0"
-)
-
-func sendRs232Command() {
-	port, err := rs232.Open(COM_PORT, rs232.Options{
+func sendRs232Command(com_port string, hex_command string) {
+	port, err := rs232.Open(com_port, rs232.Options{
 		BitRate:  115200,
 		DataBits: 8,
 		StopBits: 1,
@@ -23,7 +19,7 @@ func sendRs232Command() {
 		fmt.Println(err)
 	}
 
-	n, err := port.Write([]byte(HALFBRIGHTNESS))
+	n, err := port.Write([]byte(hex_command))
 	if err != nil {
 		fmt.Println(err)
 	}
@@ -34,8 +30,11 @@ func sendRs232Command() {
 
 func main() {
 
+	com_port := os.Args[1]
+	hex_command := os.Args[2]
+
 	fmt.Println("sending test rs232 command")
-	sendRs232Command()
+	sendRs232Command(com_port, hex_command)
 	fmt.Println("Sent test rs232 command")
 
 }
