@@ -8,7 +8,7 @@ import (
 
 const (
 	HALFBRIGHTNESS = "HEXCODE"
-	COM_PORT       = "COM1"
+	COM_PORT       = "ttyUSB0"
 )
 
 func sendRs232Command() {
