@@ -6,7 +6,7 @@
 $ cd Documents
 $ cd rs232-controller
 $ git pull origin master
-$ ./rs232-controller /dev/ttyUSB0 "HEXCODEHALFBRIGHTNESS" "HEXCODEFULLBRIGHTNESS" &
+$ sudo ./rs232-controller /dev/ttyUSB0 "HEXCODEHALFBRIGHTNESS" "HEXCODEFULLBRIGHTNESS" &
 ```
 
 ## Running The Program
