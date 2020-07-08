@@ -1,5 +1,5 @@
 # Install Instructions
 
-On a linux machine run:
-
+```go
 ./install.sh
+```
