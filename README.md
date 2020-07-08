@@ -1,5 +1,13 @@
 # Install Instructions
 
-```go
-./install.sh
+## Running The Program
+
+```bash
+./rs232-controller &
+```
+
+## Testing the Program
+
+```bash
+./test_rs232
 ```
