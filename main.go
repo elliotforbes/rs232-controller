@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/chimera/go-inside/rs232"
@@ -10,11 +11,10 @@ import (
 
 const (
 	HALFBRIGHTNESS = "HEXCODE"
-	COM_PORT       = "COM1"
 )
 
-func sendRs232Command() {
-	port, err := rs232.Open(COM_PORT, rs232.Options{
+func sendRs232Command(com_port string) {
+	port, err := rs232.Open(com_port, rs232.Options{
 		BitRate:  115200,
 		DataBits: 8,
 		StopBits: 1,
@@ -36,6 +36,8 @@ func sendRs232Command() {
 
 func main() {
 
+	com_port := os.Args[1]
+
 	for {
 		year, month, day := time.Now().Date()
 
@@ -46,7 +48,7 @@ func main() {
 
 		if time.Now().Sub(set) > 0 {
 			fmt.Println("After Sunset, sending rs232 command")
-			sendRs232Command()
+			sendRs232Command(com_port)
 		} else {
 			fmt.Println("Before Sunset, not sending")
 		}
