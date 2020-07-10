@@ -1,6 +1,7 @@
 package main
 
 import (
+	"encoding/hex"
 	"fmt"
 	"os"
 	"strconv"
@@ -20,7 +21,12 @@ func sendRs232Command(com_port string, hex_command string, bit_rate int) {
 		fmt.Println(err)
 	}
 
-	n, err := port.Write([]byte(hex_command))
+	data, err := hex.DecodeString(hex_command)
+	if err != nil {
+		panic(err)
+	}
+
+	n, err := port.Write([]byte(data))
 	if err != nil {
 		fmt.Println(err)
 	}
