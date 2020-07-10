@@ -3,15 +3,16 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 	"time"
 
 	"github.com/elliotforbes/rs232-controller/rs232"
 	"github.com/nathan-osman/go-sunrise"
 )
 
-func sendRs232Command(com_port string, hex_code string) {
+func sendRs232Command(com_port string, hex_code string, bit_rate int) {
 	port, err := rs232.Open(com_port, rs232.Options{
-		BitRate:  115200,
+		BitRate:  uint32(bit_rate),
 		DataBits: 8,
 		StopBits: 1,
 		Parity:   rs232.PARITY_NONE,
@@ -38,8 +39,12 @@ func get7am(t time.Time) time.Time {
 func main() {
 
 	com_port := os.Args[1]
-	half_brightness := os.Args[2]
-	full_brightness := os.Args[3]
+	bit_rate, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		fmt.Println("Second Argument needs to be a number")
+	}
+	half_brightness := os.Args[3]
+	full_brightness := os.Args[4]
 
 	for {
 
@@ -59,7 +64,7 @@ func main() {
 		if time.Now().Sub(set) > 0 {
 			if set_half_brightness == false {
 				fmt.Println("After Sunset, sending rs232 command")
-				sendRs232Command(com_port, half_brightness)
+				sendRs232Command(com_port, half_brightness, bit_rate)
 				set_half_brightness = true
 				set_full_brightness = false
 			}
@@ -69,7 +74,7 @@ func main() {
 		// send full brightness command
 		if get7am(today).Sub(time.Now()) > 0 && time.Now().Sub(set) < 0 {
 			if set_full_brightness == false {
-				sendRs232Command(com_port, full_brightness)
+				sendRs232Command(com_port, full_brightness, bit_rate)
 				fmt.Println("Before Sunset, not sending")
 				set_full_brightness = true
 				set_half_brightness = false

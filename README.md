@@ -6,17 +6,17 @@
 $ cd Documents
 $ cd rs232-controller
 $ git pull origin master
-$ ./rs232-controller /dev/ttyUSB0 "HEXCODEHALFBRIGHTNESS" "HEXCODEFULLBRIGHTNESS" &
+$ ./rs232-controller /dev/ttyUSB0 BIT_RATE "HEXCODEHALFBRIGHTNESS" "HEXCODEFULLBRIGHTNESS" &
 ```
 
 ## Running The Program
 
 ```bash
-./rs232-controller /dev/ttyUSB0 HALFBRIGHTNESS FULLBRIGHTNESS &
+./rs232-controller /dev/ttyUSB0 BIT_RATE HALFBRIGHTNESS FULLBRIGHTNESS &
 ```
 
 ## Testing the Program
 
 ```bash
-./test_rs232 /dev/ttyUSB0 HEXSTRING
+./test_rs232 /dev/ttyUSB0 BIT_RATE "HEXCODETURNON"
 ```

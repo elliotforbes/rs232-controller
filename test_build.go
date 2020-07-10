@@ -3,13 +3,14 @@ package main
 import (
 	"fmt"
 	"os"
+	"strconv"
 
 	"github.com/elliotforbes/rs232-controller/rs232"
 )
 
-func sendRs232Command(com_port string, hex_command string) {
+func sendRs232Command(com_port string, hex_command string, bit_rate int) {
 	port, err := rs232.Open(com_port, rs232.Options{
-		BitRate:  115200,
+		BitRate:  uint32(bit_rate),
 		DataBits: 8,
 		StopBits: 1,
 		Parity:   rs232.PARITY_NONE,
@@ -31,10 +32,14 @@ func sendRs232Command(com_port string, hex_command string) {
 func main() {
 
 	com_port := os.Args[1]
-	hex_command := os.Args[2]
+	bit_rate, err := strconv.Atoi(os.Args[2])
+	if err != nil {
+		fmt.Println("Second Argument needs to be a number")
+	}
+	hex_command := os.Args[3]
 
 	fmt.Println("sending test rs232 command")
-	sendRs232Command(com_port, hex_command)
+	sendRs232Command(com_port, hex_command, bit_rate)
 	fmt.Println("Sent test rs232 command")
 
 }
