@@ -1,5 +1,13 @@
 # Install Instructions
 
+# Finding USB Ports
+
+```bash
+$ sudo dmesg | grep tty
+```
+
+# Setup Instructions
+
 1. Open Terminal
 
 ```bash
