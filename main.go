@@ -37,7 +37,7 @@ func sendRs232Command(com_port string, hex_code string, bit_rate int) {
 
 }
 
-func get7am(t time.Time) time.Time {
+func Get7am(t time.Time) time.Time {
 	year, month, day := t.Date()
 	return time.Date(year, month, day, 7, 0, 0, 0, t.Location())
 }
@@ -52,12 +52,12 @@ func main() {
 	half_brightness := os.Args[3]
 	full_brightness := os.Args[4]
 
+	set_half_brightness := false
+	set_full_brightness := false
+
 	for {
 
 		today := time.Now()
-
-		set_half_brightness := false
-		set_full_brightness := false
 
 		year, month, day := time.Now().Date()
 
@@ -78,7 +78,7 @@ func main() {
 
 		// if past 7am and less than sunset
 		// send full brightness command
-		if get7am(today).Sub(time.Now()) > 0 && time.Now().Sub(set) < 0 {
+		if Get7am(today).Sub(time.Now()) > 0 && time.Now().Sub(set) < 0 {
 			if set_full_brightness == false {
 				sendRs232Command(com_port, full_brightness, bit_rate)
 				fmt.Println("Before Sunset, not sending")
